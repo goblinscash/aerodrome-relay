@@ -7,7 +7,7 @@ import "forge-std/StdJson.sol";
 import {Registry} from "src/Registry.sol";
 import {AutoConverter} from "src/autoConverter/AutoConverter.sol";
 import {AutoConverterFactory} from "src/autoConverter/AutoConverterFactory.sol";
-import {Optimizer} from "src/Optimizer.sol";
+import {OptimizerBase} from "src/OptimizerBase.sol";
 
 contract DeployAutoConverter is Script {
     using stdJson for string;
@@ -22,7 +22,7 @@ contract DeployAutoConverter is Script {
     Registry public keeperRegistry;
     Registry public optimizerRegistry;
     Registry public relayFactoryRegistry;
-    Optimizer public optimizer;
+    OptimizerBase public optimizer;
     string public jsonConstants;
     string public jsonOutput;
 
@@ -44,7 +44,7 @@ contract DeployAutoConverter is Script {
         relayFactoryRegistry = Registry(abi.decode(jsonOutput.parseRaw(".RelayFactoryRegistry"), (address)));
         keeperRegistry = Registry(abi.decode(jsonOutput.parseRaw(".KeeperRegistry"), (address)));
         optimizerRegistry = Registry(abi.decode(jsonOutput.parseRaw(".OptimizerRegistry"), (address)));
-        optimizer = Optimizer(abi.decode(jsonOutput.parseRaw(".Optimizer"), (address)));
+        optimizer = OptimizerBase(abi.decode(jsonOutput.parseRaw(".Optimizer"), (address)));
 
         vm.startBroadcast(deployerAddress);
 

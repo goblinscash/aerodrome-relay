@@ -38,11 +38,11 @@ source .env
 
 ### Deployment
 
-#### Optimism
+#### Base
 
 ```
-forge script script/Deploy.s.sol:Deploy --broadcast --slow --rpc-url optimism --verify -vvvv
-forge script script/DeployAutoConverter.s.sol:DeployAutoConverter --broadcast --slow --rpc-url optimism --verify -vvvv
+forge script script/DeployBase.s.sol:Deploy --broadcast --slow --rpc-url base --verify -vvvv
+forge script script/DeployAutoConverter.s.sol:DeployAutoConverter --broadcast --slow --rpc-url base --verify -vvvv
 ```
 
 #### Tenderly

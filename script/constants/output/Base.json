@@ -1,7 +1,7 @@
 {
-  "AutoCompounderFactory": "0xD36dAb3bEf6DD077bC4D59098d03fF1053e17397",
-  "KeeperRegistry": "0x08724A9b94767a0BB9b539d3133Ac7A6AF9F283c",
-  "Optimizer": "0x79CF636530790602e74500ae560047c98A6990d3",
-  "OptimizerRegistry": "0xabE4cbcE47707D7A74bF6F1a343FF2c92267D3ea",
-  "RelayFactoryRegistry": "0xD308aBCe663302d3b86b36d332CEFd8A4F62C5Ed"
+  "AutoCompounderFactory": "0xe634d88af31aA7aE7FC3Fbe21C83E15Ab5621Ae0",
+  "KeeperRegistry": "0xB0E0918727aE544C3FC05525aFc63Fb38EE9a71F",
+  "Optimizer": "0xE2E2F2da0c6c22842b9aA87990c964f3850346C3",
+  "OptimizerRegistry": "0xF55B5e68cb5aBe900D5058dCAD0Eb8a6e1443E36",
+  "RelayFactoryRegistry": "0xd870e71259ddc6E02b29b6Ed46e51B239af8BaFd"
 }
