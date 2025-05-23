@@ -41,8 +41,8 @@ source .env
 #### Base
 
 ```
-forge script script/DeployBase.s.sol:Deploy --broadcast --slow --rpc-url base --verify -vvvv
-forge script script/DeployAutoConverter.s.sol:DeployAutoConverter --broadcast --slow --rpc-url base --verify -vvvv
+forge script script/DeployBase.s.sol:Deploy --broadcast --slow --rpc-url bsc --verify -vvvv
+forge script script/DeployAutoConverter.s.sol:DeployAutoConverter --broadcast --slow --rpc-url bsc --verify -vvvv
 ```
 
 #### Tenderly
@@ -74,3 +74,22 @@ For additional support with Tenderly deployment, see their
 Note that if deploying to a chain other than Optimism, if you have a different .env variable name
 used for `RPC_URL`, `SCAN_API_KEY` and `ETHERSCAN_VERIFIER_URL`, you will need to use the
 corresponding chain name by also updating `foundry.toml`.
+
+
+Relay deployment:
+
+Use safe transaction builder and execute the following 3 transactions with proper arguments.
+
+1) mTokenId = escrow.createManagedLockFor(address(owner));
+2) escrow.approve(address(autoConverterFactory), mTokenId);
+3) autoConverterFactory.createRelay(address(owner), mTokenId, "AutoConverter", abi.encode(address(token)))
+
+Relay verification:
+
+```
+# autocompounder
+forge verify-contract --rpc-url bsc --watch --constructor-args $(cast abi-encode "constructor(address,address,string,address,address,address)" "0xeA5BAB4AdCe8cfEf9BAFDca2cDdBBD0BFF169855" "0x7853A6D5f4c6797700F77f0c2Ed21C4C84D63ba1" "Autocompounder" "0x38a6c73B953D836eF862293b6B672bAf656E96c5" "0xa854ac5596bb765Fb368238fE1b119D35C05903a" "0x4D3c2f4d98a05B74628B73f8091c88a4027D19e8")  0x7327a84F535528BE1Ca24901476F91b8Ea953C06 src/autoCompounder/AutoCompounder.sol:AutoCompounder
+
+# converter for tUSDT
+forge verify-contract --rpc-url bsc --watch --constructor-args $(cast abi-encode "constructor(address,address,string,address,address,address,address)" "0xeA5BAB4AdCe8cfEf9BAFDca2cDdBBD0BFF169855" "0x7853A6D5f4c6797700F77f0c2Ed21C4C84D63ba1" "USDT Autoconverter" "0x38a6c73B953D836eF862293b6B672bAf656E96c5" "0xa44319D6232afEAa21A38b040Ca095110ad76d38" "0xa854ac5596bb765Fb368238fE1b119D35C05903a" "0x807B76a14d94821b56a0e05e8C1C6Fb077aE01F2") 0x6252e51678Eb8bbE3E2107882836F710F7777994 src/autoConverter/AutoConverter.sol:AutoConverter
+```
