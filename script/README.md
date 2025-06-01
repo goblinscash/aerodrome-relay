@@ -80,6 +80,14 @@ Relay deployment:
 
 Use safe transaction builder and execute the following 3 transactions with proper arguments.
 
+Autocompounder
+
+1) mTokenId = escrow.createManagedLockFor(address(owner));
+2) escrow.approve(address(autoCompounderFactory), mTokenId);
+3) autoCompounderFactory.createRelay(address(owner), mTokenId, "AutoConverter", 0x)
+
+Autoconverter:
+
 1) mTokenId = escrow.createManagedLockFor(address(owner));
 2) escrow.approve(address(autoConverterFactory), mTokenId);
 3) autoConverterFactory.createRelay(address(owner), mTokenId, "AutoConverter", abi.encode(address(token)))
@@ -88,8 +96,8 @@ Relay verification:
 
 ```
 # autocompounder
-forge verify-contract --rpc-url bsc --watch --constructor-args $(cast abi-encode "constructor(address,address,string,address,address,address)" "0xeA5BAB4AdCe8cfEf9BAFDca2cDdBBD0BFF169855" "0x7853A6D5f4c6797700F77f0c2Ed21C4C84D63ba1" "Autocompounder" "0x38a6c73B953D836eF862293b6B672bAf656E96c5" "0xa854ac5596bb765Fb368238fE1b119D35C05903a" "0x4D3c2f4d98a05B74628B73f8091c88a4027D19e8")  0x7327a84F535528BE1Ca24901476F91b8Ea953C06 src/autoCompounder/AutoCompounder.sol:AutoCompounder
+forge verify-contract --rpc-url bsc --watch --constructor-args $(cast abi-encode "constructor(address,address,string,address,address,address)" "0x83385E207600Fd1401770E642e5dE12d6324AfF8" "0xa32da65DF7492D05814FacC7be9f5049A826b507" "veGob Maxi" "0xeCe23FBaEf237BbE8696258717CDdAfB21a0e4C9" "0x7EE75A9CC5FdFA07e92Bbcc5dD5475b19fd8ff2b" "0x0eb0fe1dbA645f8EcdC393573Ef8DC5BD4B28403")  0x3aD8e7Da834bcB736d35ec1446f8cfaC4D53d236 src/autoCompounder/AutoCompounder.sol:AutoCompounder
 
 # converter for tUSDT
-forge verify-contract --rpc-url bsc --watch --constructor-args $(cast abi-encode "constructor(address,address,string,address,address,address,address)" "0xeA5BAB4AdCe8cfEf9BAFDca2cDdBBD0BFF169855" "0x7853A6D5f4c6797700F77f0c2Ed21C4C84D63ba1" "USDT Autoconverter" "0x38a6c73B953D836eF862293b6B672bAf656E96c5" "0xa44319D6232afEAa21A38b040Ca095110ad76d38" "0xa854ac5596bb765Fb368238fE1b119D35C05903a" "0x807B76a14d94821b56a0e05e8C1C6Fb077aE01F2") 0x6252e51678Eb8bbE3E2107882836F710F7777994 src/autoConverter/AutoConverter.sol:AutoConverter
+forge verify-contract --rpc-url bsc --watch --constructor-args $(cast abi-encode "constructor(address,address,string,address,address,address,address)" "0x83385E207600Fd1401770E642e5dE12d6324AfF8" "0xa32da65DF7492D05814FacC7be9f5049A826b507" "USDT Autoconverter" "0xeCe23FBaEf237BbE8696258717CDdAfB21a0e4C9" "0xa44319D6232afEAa21A38b040Ca095110ad76d38" "0x7EE75A9CC5FdFA07e92Bbcc5dD5475b19fd8ff2b" "0x807B76a14d94821b56a0e05e8C1C6Fb077aE01F2") 0x6252e51678Eb8bbE3E2107882836F710F7777994 src/autoConverter/AutoConverter.sol:AutoConverter
 ```
